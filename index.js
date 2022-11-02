@@ -15,8 +15,9 @@ app.get("/items", (req, res) => {
   } else {
     return res.sendStatus(404);
   }
+  const sanitizedItems = sanitizeData(items);
   res.status(200).json({
-    items: items
+    items: sanitizedItems
   })
 })
 
@@ -34,9 +35,26 @@ app.post("/items/addItem", (req,res) => {
 
   fs.mkdirSync("data/items", {recursive: true});
   fs.appendFileSync("data/items/items.txt", JSON.stringify(item) + "\n");
-
   res.status(201).json({
     id: id,
     item: itemName
   });
 })
+
+/** @returns an array of objects that formats the data into something more digestible */
+function sanitizeData(str){
+  const splitData = str.split('\n');
+  const data = [];
+  try {
+    splitData.forEach((element, index) => {
+      if (element.length < 1){
+        return;
+      } 
+      data.push(JSON.parse(element));
+    })
+  } catch (error) {
+    console.log(error);
+  }
+  
+  return data;
+}

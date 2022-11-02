@@ -9,7 +9,15 @@ app.use(express.json());
 app.listen(3000, () => console.log("Server is now running"));
 
 app.get("/items", (req, res) => {
-  
+  let items;
+  if (fs.existsSync("data/items")) {
+      items = fs.readFileSync("data/items/items.txt", "utf-8");
+  } else {
+    return res.sendStatus(404);
+  }
+  res.status(200).json({
+    items: items
+  })
 })
 
 app.post("/items/addItem", (req,res) => {

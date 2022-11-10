@@ -4,4 +4,4 @@ This application currently stores all data within a text file, which is somethin
 ## Implementation Details
 This project currently works with Node and Express. Data storage is being written into a text file which would impact the limitations of what can really be achieved from retrieving data. In the future, I would suggest using a database on further development for this project.
 
-Also, on landing at the route /items, if there are no items, we currently return a 404 status. I think an improved implementation would be something where we prompt or nudge the user to let them know that we currently have no items and they should add some. 
+Also, on landing at the route /items, if there are no items, we currently return a 404 status. I think an improved implementation would be something where we prompt or nudge the user to let them know that we currently have no items and they should add some.

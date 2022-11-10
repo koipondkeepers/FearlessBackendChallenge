@@ -41,6 +41,14 @@ app.post("/items/addItem", (req,res) => {
   });
 })
 
+app.delete("/items/deleteItems", (req,res) => {
+  fs.unlink("data/items/items.txt", function (err) {
+    if (err) throw err;
+    console.log('File Deleted');
+  });
+  res.status(200).send('Deleted');
+})
+
 /** @returns an array of objects that formats the data into something more digestible */
 function sanitizeData(str){
   const splitData = str.split('\n');
